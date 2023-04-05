@@ -10,20 +10,26 @@ AirshipCore.xcframework
 AirshipMessageCenter.xcframework
 "
 
+rm -rf Airship*
+
 echo "Downloading $sourceUrl"
 curl $sourceUrl -O -L
 
 echo "\nUnzipping Airship.zip"
-rm -r Airship
 unzip Airship.zip -d Airship >/dev/null
 
+pushd Airship
 for framework in $frameworks
 do
-    echo "\nProcessing $framework..."
-    zip -r "$framework.zip" "Airship/$framework" >/dev/null
+    echo "\nProcessing $framework.zip..."
+    zip -r "$framework.zip" "$framework" >/dev/null
 
     echo "Computing checksum $framework..."
     swift package compute-checksum $framework.zip
+
+    mv "$framework.zip" ../
 done
+popd
 
 rm -r Airship
+rm Airship.zip
