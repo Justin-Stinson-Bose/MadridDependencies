@@ -8,6 +8,7 @@ frameworks="AirshipAutomation.xcframework
 AirshipBasement.xcframework
 AirshipCore.xcframework
 AirshipMessageCenter.xcframework
+AirshipNotificationServiceExtension.xcframework
 "
 
 rm -rf Airship*
